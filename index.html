@@ -9,14 +9,18 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src="assets/underscore.js"></script>
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src="assets/backbone.js"></script>
     <script src="assets/dataJSON2.js"></script>
     <script src="assets/HandleBars.js"></script>
     <script src="assets/jquery.js"></script>
     <script src="assets/backbone.js"></script>
     <link rel="stylesheet" href="assets/style.css" type="text/css">
+    <style type="text/css"></style>
+
+    <script src="models.js"></script>
+    <script src="views.js"></script>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -30,12 +34,6 @@
       <script src="../assets/js/html5shiv.js"></script>
     <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png"> -->
   </head>
 
   <body>
@@ -80,11 +78,11 @@
     <div class="container">
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
+      <!-- <div class="hero-unit">
         <h1>adValue from adWords</h1>
         <p>Get instant information from your adWords data!</p>
         <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-      </div>
+      </div> -->
 
       <div id='tabs'>
       </div>
@@ -96,8 +94,7 @@
     </div> <!-- /container -->
 
     <script>
-
-
+      app = new App();
     </script>
   </body>
 </html>
