@@ -1,13 +1,15 @@
-App = Backbone.Model.extend({
-  initialize: function(){
-    this.set(tabModles, new Tabs());
-    this.set(tabsView, new TabsView())
-    var bubbleChartModel = new Tab({viewId: "bubble-chart", csvData:'blah1,blah2\nval11,val12\n,val21,val22\n'})
-    tabs.add(bubbleChartModel);
+var App = function(){
+  this.tableLogic = new TableLogic;
+  this.tabModles = new Tabs();
+  this.tabsView =  new TabsView({el: '#tabs', model: this.tableLogic});
+  this.bubbleChartModel = new Tab({viewId: "bubble-chart", csvData:'blah1,blah2\nval11,val12\n,val21,val22\n'});
+  this.tabView = new TabView({model: this.bubbleChartModel, id: this.bubbleChartModel.get('viewId')});  
+  this.tabModles.add(this.bubbleChartModel);
+};
 
-    // tabs.add(new Tab({viewId: "other_type", csvData:'blah1,blah2\nval11,val12\n,val21,val22\n'}));
-    // tabs.add(new Tab({viewId: "other_type", csvData:'blah1,blah2\nval11,val12\n,val21,val22\n'}));
-
+var TableLogic = Backbone.Model.extend({
+  defaults: {
+    activeTab: "bubble-tab"
   }
 });
 
@@ -16,7 +18,4 @@ var Tabs = Backbone.Collection.extend({
 });
 
 var Tab = Backbone.Model.extend({
-  initialize: function(){
-
-  }
 })
