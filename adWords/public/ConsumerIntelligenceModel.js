@@ -30,13 +30,11 @@ var ConsumerIntelligenceModel = Backbone.Model.extend({
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    var self = this;
     d3.csv("BillsWork/data2.csv", function(error, data) {
-      debugger
       data.forEach(function(d) {
         d.ImpressionShare = +d.ImpressionShare;
       });
-
       x.domain(data.map(function(d) { return d.AdHeadline; }));
       y.domain([0, d3.max(data, function(d) { return d.ImpressionShare; })]);
 
@@ -74,8 +72,7 @@ var ConsumerIntelligenceModel = Backbone.Model.extend({
             .attr("rx", 40)
             .attr("ry", 5)
             .attr("fill","red");
-
+    self.set('svg', svg);
     });
-    this.set('svg', svg);
   }
 })

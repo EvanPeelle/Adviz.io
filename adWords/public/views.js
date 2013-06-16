@@ -37,11 +37,10 @@ var CampaignProfitView = Backbone.View.extend({
       this.render();
     },this);
 
-    this.model.on('change:svg', function(){
-      debugger
-      this.render();
-    },this)
-    this.render();
+    // this.model.on('change:svg', function(){
+    //   this.render();
+    // },this)
+    // this.render();
   },
   render: function(){
     if(this.model.get('active') === true){
@@ -62,13 +61,13 @@ var ConsumerIntelligenceView = Backbone.View.extend({
       this.render();
     },this);
 
-    this.model.on('change:svg', function(){
-      this.render();
-    },this)
-    this.render();
+    // this.model.on('change:svg', function(){
+    //   this.render();
+    // },this)
+    // this.render();
   },
   render: function(){
-    if(this.model.get('active') === true){
+    if(this.model.get('active') === true && this.model.get('svg')){
       console.log('int', this.model.get('svg'));
       $('#tabs').append(this.model.get('svg')[0]);
     }
@@ -86,12 +85,12 @@ var QualityScoreView = Backbone.View.extend({
       this.render();
     },this);
 
-    this.model.on('change:svg', function(){
-      this.render();
-    },this)
-    this.render();
+    // this.model.on('change:svg', function(){
+    //   this.render();
+    // },this)
+    // this.render();
   },
-  render: function(){
+  render: function(){ 
     if(this.model.get('active') === true){
       console.log('int', this.model.get('svg'));
       $('#tabs').append(this.model.get('svg')[0]);
