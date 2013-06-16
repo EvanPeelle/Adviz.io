@@ -28,6 +28,10 @@ var TabLogic = Backbone.Model.extend({
         this.get('tabModels')[key].set('active', true);
       }else {
         this.get('tabModels')[key].set('active', false);
+        debugger
+        if(key === 'consumerIntelligenceModel'){
+          this.get('tabModels').consumerIntelligenceModel.set('svg', null);
+        }
       }
     }
   }

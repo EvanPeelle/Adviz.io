@@ -24,20 +24,21 @@ var ConsumerIntelligenceModel = Backbone.Model.extend({
         .scale(y)
         .orient("left")
         .tickFormat(formatPercent);
-
-    var svg = d3.select(el).append("svg")
+        debugger
+    var svg = d3.select('body').append("svg")  //right here  body to el
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     var self = this;
+    console.log(this.get('svg') === svg);
     d3.csv("BillsWork/data2.csv", function(error, data) {
+      console.log(self.get('svg') === svg);
       data.forEach(function(d) {
         d.ImpressionShare = +d.ImpressionShare;
       });
       x.domain(data.map(function(d) { return d.AdHeadline; }));
       y.domain([0, d3.max(data, function(d) { return d.ImpressionShare; })]);
-
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
@@ -72,7 +73,8 @@ var ConsumerIntelligenceModel = Backbone.Model.extend({
             .attr("rx", 40)
             .attr("ry", 5)
             .attr("fill","red");
-    self.set('svg', svg);
+      self.set('svg', svg);
     });
+  this.set('svg', svg);
   }
 })
