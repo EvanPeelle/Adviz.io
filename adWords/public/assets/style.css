@@ -13,6 +13,21 @@ background:#ffffff;
 border-radius:25px;
 }
 
+#tabNotes{
+	float: right !important;
+	width: 543px;
+}
+
+#tabNotes ul{
+	margin-top: 20%;
+	float: left;
+	font-size: 250%; 
+	line-height:100px !important
+}
+
+#tabNotes ul div{
+	margin-top: 50px;
+}
 
 .bar.positive {
   fill: #0066CC;

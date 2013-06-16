@@ -46,6 +46,13 @@ var CampaignProfitView = Backbone.View.extend({
     if(this.model.get('active') === true){
       console.log('int', this.model.get('svg'));
       $('#tabs').append(this.model.get('svg')[0]);
+      var $tabNotes = $('<div id="tabNotes"></div>')
+      $('#tabs').append($tabNotes);
+      $('#tabNotes').append(('<ul type="circle">' + 
+         '<li><div>Pause Red</div></li>' +
+         '<li><div>Increase bids on Blue</div></li>' +
+        '</ul>'
+        ));
     }
   }
 });
@@ -74,6 +81,15 @@ var ConsumerIntelligenceView = Backbone.View.extend({
         $('#tabs').append($('svg'));
       }
       $('svg').html(this.model.get('svg')[0]);
+      if(!$('#tabNotes').length){
+        var $tabNotes = $('<div id="tabNotes"></div>')
+        $('#tabs').append($tabNotes);
+        $('#tabNotes').append(('<ul type="circle">' + 
+         '<li><div>Increase volume on "Cat the Hat"</div></li>' +
+         '<li><div>Pause all others</div></li>' +
+        '</ul>'
+        ));
+      }
     }
   }
 });
@@ -98,11 +114,20 @@ var QualityScoreView = Backbone.View.extend({
     // debugger
     if(this.model.get('active') === true && this.model.get('svg')){
       console.log('int', this.model.get('svg'));
-      debugger
       if(!$('#tabs').find('svg').length){
         $('#tabs').append($('svg'));
       }
       $('svg').html(this.model.get('svg')[0]);
+      if(!$('#tabNotes').length){
+        var $tabNotes = $('<div id="tabNotes"></div>')
+        $('#tabs').append($tabNotes);
+        $('#tabNotes').append(('<ul type="circle">' + 
+         '<li><div>Understand the two different types of lists</div></li>' +
+         '<li><div>Understand embedded bullet lists</div></li>' +
+         '<li><div>Ensuring W3C Compliance</div></li>' +
+        '</ul>'
+        ));
+      }
     }
   }
 });
