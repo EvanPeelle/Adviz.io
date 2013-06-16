@@ -26,7 +26,7 @@ border-radius:25px;
 }
 
 #tabNotes ul div{
-	margin-top: 50px;
+	margin-top: 100px;
 }
 
 .bar.positive {
@@ -76,3 +76,24 @@ b,
 .x.axis path {
   display: none;
 }
+
+.consumer_intelligence_text {
+  position: fixed;
+  right: 150px;
+  bottom: 240px;
+}
+
+.quality_score_text {
+  position: fixed;
+  right: 150px;
+  bottom: 100px;
+}
+
+.campaign_profit {
+  position: fixed;
+  right: 250px;
+  bottom: 280px;
+}
+
+
+

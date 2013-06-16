@@ -29,31 +29,73 @@ var TabsView = Backbone.View.extend({
 var CampaignProfitView = Backbone.View.extend({
   id: 'tabs',
 
-  initialize: function(){
+  show: 'before',
+  lastRenderType: 'before',
+
+  afterModel: null,
+  //model
+  //afterModel
+  // events: {
+  //   'click .toggleButton': 'toggleView'
+  // },
+
+  initialize: function(options){
+    this.afterModel = options.afterModel;
     this.model.on('change:active', function(){
       if(this.model.get('svg') === null){
-        this.model.setSvg(this.el);
+        
+        
       }
       this.render();
     },this);
 
-    // this.model.on('change:svg', function(){
-    //   this.render();
-    // },this)
-    // this.render();
+    // this.on('click','button',function(){
+    //   debugger
+    //   console.log('clicked');
+    // });
+  },
+  toggleView: function(){
+    this.show = this.show === 'before' ? 'after' : 'before';
+    console.log("show", this.show);
+    this.render();
   },
   render: function(){
-    if(this.model.get('active') === true){
-      console.log('int', this.model.get('svg'));
-      $('#tabs').append(this.model.get('svg')[0]);
+    debugger
+    if(this.lastRenderType !== this.show){
+      $('svg').remove();
+      $('#tabNotes').remove();
+    }
+    this.lastRenderType = this.show;
+    if(this.show === 'before'){
+      if(this.model.get('active') === true){
+        this.model.setSvg(this.el);
+        console.log('int', this.model.get('svg'));
+        $('#tabs').append(this.model.get('svg')[0]);
+        var $tabNotes = $('<div id="tabNotes"></div>')
+        $('#tabs').append($tabNotes);
+        $('#tabNotes').append(('<ul type="circle" class="campaign_profit">' + 
+            '<div>Recommended Optimizations</div>'+
+           '<li><div>Pause bids on red keywords</div></li>' +
+           '<li><div>Increase bids on blue keywords</div></li>' +
+          '</ul>'
+        ));
+      }
+    } else {
+      this.afterModel.setSvg(this.el);
+      $('#tabs').append(this.afterModel.get('svg')[0]);
       var $tabNotes = $('<div id="tabNotes"></div>')
       $('#tabs').append($tabNotes);
-      $('#tabNotes').append(('<ul type="circle">' + 
-         '<li><div>Pause Red</div></li>' +
-         '<li><div>Increase bids on Blue</div></li>' +
-        '</ul>'
-        ));
+      $('#tabNotes').append(('<ul type="circle" class="campaign_profit">' + 
+            '<div>Recommended Optimizations</div>'+
+           '<li><div>Pause bids on red keywords</div></li>' +
+           '<li><div>Increase bids on blue keywords</div></li>' +
+          '</ul>'
+      ));
     }
+    var self = this;
+    $('#tabNotes ul').append('<button class="btn btn-primary toggleButton" type="button">Showing: '+ this.show +'</button>').on('click', function(){
+      self.toggleView();
+    });
   }
 });
 
@@ -76,7 +118,6 @@ var ConsumerIntelligenceView = Backbone.View.extend({
   render: function(){
     // debugger
     if(this.model.get('active') === true && this.model.get('svg')){
-      console.log('int', this.model.get('svg'));
       if(!$('#tabs').find('svg').length){
         $('#tabs').append($('svg'));
       }
@@ -84,10 +125,11 @@ var ConsumerIntelligenceView = Backbone.View.extend({
       if(!$('#tabNotes').length){
         var $tabNotes = $('<div id="tabNotes"></div>')
         $('#tabs').append($tabNotes);
-        $('#tabNotes').append(('<ul type="circle">' + 
-         '<li><div>Increase volume on "Cat the Hat"</div></li>' +
-         '<li><div>Pause all others</div></li>' +
-        '</ul>'
+        $('#tabNotes').append(('<ul type="circle" class="consumer_intelligence_text">' + 
+            '<div>Recommended Optimizations</div>'+
+           '<li><div>Increase volume on "cat the hat"</div></li>' +
+           '<li><div>Pause all others</div></li>' +
+          '</ul>'
         ));
       }
     }
@@ -111,9 +153,7 @@ var QualityScoreView = Backbone.View.extend({
     this.render();
   },
   render: function(){
-    // debugger
     if(this.model.get('active') === true && this.model.get('svg')){
-      console.log('int', this.model.get('svg'));
       if(!$('#tabs').find('svg').length){
         $('#tabs').append($('svg'));
       }
@@ -121,11 +161,12 @@ var QualityScoreView = Backbone.View.extend({
       if(!$('#tabNotes').length){
         var $tabNotes = $('<div id="tabNotes"></div>')
         $('#tabs').append($tabNotes);
-        $('#tabNotes').append(('<ul type="circle">' + 
-         '<li><div>Understand the two different types of lists</div></li>' +
-         '<li><div>Understand embedded bullet lists</div></li>' +
-         '<li><div>Ensuring W3C Compliance</div></li>' +
-        '</ul>'
+        $('#tabNotes').append(('<ul type="circle" class="quality_score_text">' + 
+            '<div>Recommended Optimizations</div>'+
+           '<li><div>Seperate and optimize red keywords</div></li>' +
+           '<li><div>Cat in the hat</div></li>' +
+           '<li><div>Green eggs and ham</div></li>' +
+          '</ul>'
         ));
       }
     }

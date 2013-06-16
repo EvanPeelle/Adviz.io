@@ -4,7 +4,6 @@ var QualityScoreModel = Backbone.Model.extend({
     svg: null
   },
   setSvg: function(el){
-    debugger
     var margin = {top: 22, right: 10, bottom: 10, left: 10},
     width = 560 - margin.left - margin.right,
     height = 3000 - margin.top - margin.bottom;
@@ -26,7 +25,6 @@ var QualityScoreModel = Backbone.Model.extend({
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     var self = this;
     d3.csv("BillsWork2/transformed.csv", type, function(error, data) {
-      debugger
       x.domain(d3.extent(data, function(d) { return d.QualityScore; })).nice();
       y.domain(data.map(function(d) { return d.Keyword; }));
 
@@ -87,7 +85,6 @@ var QualityScoreModel = Backbone.Model.extend({
     });
 
     function type(d) {
-      debugger
       d.QualityScore = +d.QualityScore;
       return d;
     }

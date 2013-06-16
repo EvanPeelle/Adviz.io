@@ -13,7 +13,8 @@ var TabLogic = Backbone.Model.extend({
   initialize: function(){
 
     this.get('tabModels').campaignProfitModel = new CampaignProfitModel();
-    this.get('tabViews').campaignProfitView = new CampaignProfitView({model: this.get('tabModels').campaignProfitModel});
+    this.get('tabModels').campaignProfitAfterModel = new CampaignProfitAfterModel();
+    this.get('tabViews').campaignProfitView = new CampaignProfitView({model: this.get('tabModels').campaignProfitModel, afterModel: this.get('tabModels').campaignProfitAfterModel} );
 
     this.get('tabModels').consumerIntelligenceModel = new ConsumerIntelligenceModel();
     this.get('tabViews').consumerIntelligenceView = new ConsumerIntelligenceView({model: this.get('tabModels').consumerIntelligenceModel});
