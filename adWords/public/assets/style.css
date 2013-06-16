@@ -1,0 +1,78 @@
+body {
+	height: 10px;
+	width: 1400px;
+	margin: 25px;
+	font-style: courier;
+}
+
+#tabs
+{
+border:2px solid #a1a1a1;
+padding:10px 40px; 
+background:#ffffff;
+border-radius:25px;
+}
+
+#tabNotes{
+	float: right !important;
+	width: 543px;
+}
+
+#tabNotes ul{
+	margin-top: 20%;
+	float: left;
+	font-size: 250%; 
+	line-height:100px !important
+}
+
+#tabNotes ul div{
+	margin-top: 50px;
+}
+
+.bar.positive {
+  fill: #0066CC;
+}
+
+.star {
+  fill: black;
+}
+
+.car {
+  fill: red;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.text1 { font-size: 14px; font-weight: bold; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+body {
+  font: 10px sans-serif;
+}
+b,
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.circle {
+  fill: black;
+}
+
+.x.axis path {
+  display: none;
+}
