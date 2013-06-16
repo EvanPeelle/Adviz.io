@@ -5,10 +5,11 @@ var CampaignProfitModel = Backbone.Model.extend({
   },
   setSvg: function(el){
     var width = 500,
-    height = 500,
-    margin = 50;
-    var svg=d3.select(el).append("svg").attr("width",width).attr("height",height);
-    var x=d3.scale.linear().domain([-40,30]).range([margin,width-margin]);
+        height = 500,
+        margin = 50;
+
+    var svg=d3.select("body").append("svg").attr("width",width).attr("height",height);
+    var x=d3.scale.linear().domain([-40,25]).range([margin,width-margin]);
     var y=d3.scale.linear().domain([-0.05,0.35]).range([height-margin,margin]);
     var r=d3.scale.linear().domain([0,50]).range([0,20]);
     var o=d3.scale.linear().domain([3,100]).range([.5,1]);
@@ -44,14 +45,14 @@ var CampaignProfitModel = Backbone.Model.extend({
       .attr("x1",x).attr("x2",x)
 
 
-    d3.csv("BillsWork/data.csv",function(csv) {
+    d3.csv("BillsWork2/data.csv",function(csv) {
       // we first sort the data
       // csv.sort(function(a,b) {return b.population-a.population;});
       // then we create the marks, which we put in an initial position
       
       var color = d3.scale.linear()
-        .domain([-40,-10,10])
-        .range(["red", "purple", "blue"]);
+        .domain([-40,-10,20])
+        .range(["red", "purple", "#0066CC"]);
       
       var tooltip = d3.select("body")
         .append("div")
@@ -82,11 +83,12 @@ var CampaignProfitModel = Backbone.Model.extend({
         .attr("fill", function(d) {
         return color(d.AvgProfitUser);
         })
-        .attr('opacity', .5)
-        .style("stroke", "black")
-        .style("stroke-width", 3)
+        .attr('opacity', .6)
+        .style("stroke", "steelblue")
+        .style("stroke-width", 2)
+
+    })
         
-    });
     this.set('svg', svg);
   }
-})
+});

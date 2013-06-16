@@ -28,9 +28,18 @@ var TabLogic = Backbone.Model.extend({
         this.get('tabModels')[key].set('active', true);
       }else {
         this.get('tabModels')[key].set('active', false);
-        debugger
+          //hack... intelligence and Score don't refresh after first time 
+          //refreshing profit for animation
+        if(key === 'campaignProfitModel'){
+          this.get('tabModels').campaignProfitModel.set('svg', null);
+        }
+
         if(key === 'consumerIntelligenceModel'){
           this.get('tabModels').consumerIntelligenceModel.set('svg', null);
+        }
+         
+        if(key === 'qualityScoreModel'){
+         this.get('tabModels').qualityScoreModel.set('svg', null);
         }
       }
     }

@@ -70,7 +70,6 @@ var ConsumerIntelligenceView = Backbone.View.extend({
     // debugger
     if(this.model.get('active') === true && this.model.get('svg')){
       console.log('int', this.model.get('svg'));
-      debugger
       if(!$('#tabs').find('svg').length){
         $('#tabs').append($('svg'));
       }
@@ -90,15 +89,20 @@ var QualityScoreView = Backbone.View.extend({
       this.render();
     },this);
 
-    // this.model.on('change:svg', function(){
-    //   this.render();
-    // },this)
-    // this.render();
+    this.model.on('change:svg', function(){
+      this.render();
+    },this)
+    this.render();
   },
-  render: function(){ 
-    if(this.model.get('active') === true){
+  render: function(){
+    // debugger
+    if(this.model.get('active') === true && this.model.get('svg')){
       console.log('int', this.model.get('svg'));
-      $('#tabs').append(this.model.get('svg')[0]);
+      debugger
+      if(!$('#tabs').find('svg').length){
+        $('#tabs').append($('svg'));
+      }
+      $('svg').html(this.model.get('svg')[0]);
     }
   }
 });

@@ -12,3 +12,52 @@ padding:10px 40px;
 background:#ffffff;
 border-radius:25px;
 }
+
+
+.bar.positive {
+  fill: #0066CC;
+}
+
+.star {
+  fill: black;
+}
+
+.car {
+  fill: red;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.text1 { font-size: 14px; font-weight: bold; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+body {
+  font: 10px sans-serif;
+}
+b,
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.circle {
+  fill: black;
+}
+
+.x.axis path {
+  display: none;
+}

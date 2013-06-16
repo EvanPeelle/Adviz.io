@@ -24,21 +24,21 @@ var ConsumerIntelligenceModel = Backbone.Model.extend({
         .scale(y)
         .orient("left")
         .tickFormat(formatPercent);
-        debugger
-    var svg = d3.select('body').append("svg")  //right here  body to el
+
+    var svg = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    var self = this;
-    console.log(this.get('svg') === svg);
-    d3.csv("BillsWork/data2.csv", function(error, data) {
-      console.log(self.get('svg') === svg);
+
+    d3.csv("BillsWork2/data2.csv", function(error, data) {
       data.forEach(function(d) {
         d.ImpressionShare = +d.ImpressionShare;
       });
+
       x.domain(data.map(function(d) { return d.AdHeadline; }));
       y.domain([0, d3.max(data, function(d) { return d.ImpressionShare; })]);
+
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
@@ -58,11 +58,13 @@ var ConsumerIntelligenceModel = Backbone.Model.extend({
           .data(data)
         .enter().append("rect")
           .attr("class", "bar")
-          .attr("x", function(d) { return x(d.AdHeadline); })
-          .attr("width", x.rangeBand())
+          .attr("x", function(d) { return x(d.AdHeadline)+25; })
+          .attr("width", 60)
           .attr("y", function(d) { return y(d.ImpressionShare); })
           .attr("height", function(d) { return height - y(d.ImpressionShare); })
-          .attr('opacity', .5)
+          .attr('opacity', .7)
+          .style("stroke", "0033CC")
+          .style("stroke-width", 2)
           
       var circles = svg.selectAll(".circle")
             .data(data)
@@ -72,8 +74,12 @@ var ConsumerIntelligenceModel = Backbone.Model.extend({
             .attr("cy", function(d) { return y(d.Purchase_ConversionRate) - 20; })
             .attr("rx", 40)
             .attr("ry", 5)
-            .attr("fill","red");
-      self.set('svg', svg);
+            .attr("fill","red")
+            .style("stroke", "990000")
+            .style("stroke-width", 2)
+            .attr("opacity", .7);
+          self.set('svg', svg);
+
     });
   this.set('svg', svg);
   }

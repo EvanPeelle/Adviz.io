@@ -4,90 +4,93 @@ var QualityScoreModel = Backbone.Model.extend({
     svg: null
   },
   setSvg: function(el){
-    var width = 500,
-    height = 500,
-    margin = 50;
     debugger
-    var svg=d3.select(el).append("svg").attr("width",width).attr("height",height);
-    var x=d3.scale.linear().domain([-40,30]).range([margin,width-margin]);
-    var y=d3.scale.linear().domain([-0.05,0.35]).range([height-margin,margin]);
-    var r=d3.scale.linear().domain([0,50]).range([0,20]);
-    var o=d3.scale.linear().domain([3,100]).range([.5,1]);
-    var c=d3.scale.category10().domain(["Africa","America","Asia","Europe","Oceania"]);
+    var margin = {top: 22, right: 10, bottom: 10, left: 10},
+    width = 560 - margin.left - margin.right,
+    height = 3000 - margin.top - margin.bottom;
+
+    var x = d3.scale.linear()
+        .range([0, width])
+
+    var y = d3.scale.ordinal()
+        .rangeRoundBands([0, height], .15);
 
     var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom");
+        .scale(x)
+        .orient("top");
 
-    var yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left");
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var self = this;
+    d3.csv("BillsWork2/transformed.csv", type, function(error, data) {
+      debugger
+      x.domain(d3.extent(data, function(d) { return d.QualityScore; })).nice();
+      y.domain(data.map(function(d) { return d.Keyword; }));
 
-    svg.append("g")
-      .attr("class", "axis")
-      .attr("transform", "translate(0," + (height - margin) + ")")
-      .call(xAxis);
+      var bar = svg.selectAll(".bar")
+          .data(data)
+        .enter().append("rect")
+          .attr("class", function(d) { return d.value < 0 ? "bar negative" : "bar positive"; })
+          .attr("x", function(d) { return x(Math.min(0, d.QualityScore)); })
+          .attr("y", function(d) { return y(d.Keyword) * .2 + 1; })
+          .attr("width", function(d) { return Math.abs(x(d.QualityScore) - x(0)); })
+          .attr("height", 30)
+          .attr("opacity", 1)
 
-    svg.append("g")
-      .attr("class", "axis")
-       .attr("transform", "translate(" + margin + ",0)")
-      .call(yAxis);
-    //horizontal bars
+    var star = svg.selectAll(".star")
+          .data(data)
+        .enter().append("rect")
+          .attr("class", "star")
+          .attr("x", function(d) { return x(Math.min(0, d.QualityScore)); })
+          .attr("y", function(d) { return y(d.Keyword) * .2 + 10; })
+          .attr("width", function(d) { return Math.abs(x(2) - x(0) * d.TopPageCPC); })
+          .attr("height", 5)
+          .attr("opacity", .7)
 
-    svg.selectAll(".h").data(d3.range(-0.05,0.35,0.05)).enter()
-      .append("line").classed("h",1)
-      .attr("x1",margin).attr("x2",height-margin)
-      .attr("y1",y).attr("y2",y).text("hello")
-    //vertical bars
-    svg.selectAll(".v").data(d3.range(-40,30,10)).enter()
-      .append("line").classed("v",1)
-      .attr("y1",margin).attr("y2",width-margin)
-      .attr("x1",x).attr("x2",x)
-
-
-    d3.csv("BillsWork/data.csv",function(csv) {
-      // we first sort the data
-      // csv.sort(function(a,b) {return b.population-a.population;});
-      // then we create the marks, which we put in an initial position
-      
-      var color = d3.scale.linear()
-        .domain([-40,-10,10])
-        .range(["red", "purple", "blue"]);
-      
-      var tooltip = d3.select("body")
-        .append("div")
-        .style("visibility", "hidden")
-        .text("simple tooltip");
-
-      svg.selectAll("circle").data(csv).enter()
-        .append("circle")
-        .attr("cx",function(d) {return x(0);})
-        .attr("cy",function(d) {return y(0);})
-        .attr("r",function(d) {return r(0);})
-        .text("hello")
-          .append("title")
-          .text(function(d) {return d.Keyword;})
-        // .style("fill",function(d) {return c(d.continent);})
-        // .style("opacity",function(d) {return o(+d.GDPcap);})
-
+    var car = svg.selectAll(".car")
+          .data(data)
+        .enter().append("rect")
+          .attr("class", "car")
+          .attr("x", function(d) { return x(Math.min(0, d.FirstPageCPC)); })
+          .attr("y", function(d) { return y(d.Keyword) * .2 + 15; })
+          .attr("width", function(d) { return Math.abs(x(2) - x(0) * d.FirstPageCPC); })
+          .attr("height", 5)
+          .attr("opacity", .9)
           
 
-      // now we initiate - moving the marks to their position
+      svg.append("g")
+          .attr("class", "x axis")
+          .call(xAxis);
+          
+      svg.append("g")
+          .attr("class", "x axis")
+          .call(xAxis2);
 
-      svg.selectAll("circle").transition().duration(1000)
-        .attr("cx",function(d) {return x(+d.AvgProfitUser*1);})
-        .attr("cy",function(d) {return y(+d.PaidUser*1);})
-        .attr("r",function(d) {
-          return r((d.Cost*1)/8);
-        })
-        .attr("fill", function(d) {
-        return color(d.AvgProfitUser);
-        })
-        .attr('opacity', .5)
-        .style("stroke", "black")
-        .style("stroke-width", 3)
-        
+      svg.append("g")
+          .attr("class", "y axis")
+        .append("line")
+          .attr("x1", x(0))
+          .attr("x2", x(0))
+          .attr("y2", height);
+          
+      svg.selectAll("text1")
+          .data(data)
+          .enter()
+          .append("text")
+          .text(function(d) { return d.Keyword; })
+          .attr("y", function(d) { return y(d.Keyword) * .8; });
+          
+      self.set('svg', svg);
     });
-    this.set('svg', svg);
+
+    function type(d) {
+      debugger
+      d.QualityScore = +d.QualityScore;
+      return d;
+    }
+  this.set('svg', svg);
   }
 })
