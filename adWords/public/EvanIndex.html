@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <script src="dataJSON2.js"></script>
+    <script src="HandleBars.js"></script>
+    <script src="jquery.js"></script>
+    <script src="underscore.js"></script>
+    <script src="backbone.js"></script>
+    <script src="style.css" type="style"></script>
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+  <body>
+    <div id="smata"><button>Graph</button></div>
+    <div id="data"></div>
+    <script>
+//get better data
+//iterate over it
+//display as a clean table
+//format text
+      var Row = Backbone.Model.extend({
+      });
+      var freshRow = new Row();
+
+      freshRow.on('change', function(){
+        alert('listening to event changes');
+      });
+
+      freshRow.set({key: 'value'});
+
+      var FreshRowView = Backbone.View.extend({
+        tagName: 'tr',
+        render: function() {
+                }
+      });
+
+      var freshRowView = new FreshRowView({model: new Row()});
+
+      freshRowView.render();
+
+      //attach to dom.
+      $('#data').append(freshRowView.el);
+
+     //////////////////////////////////////////////
+
+      var TableLibrary = Backbone.Collection.extend({
+        model: Row
+      });
+      var table = new TableLibrary();
+
+      table.on("add", function(data) {
+        // alert("Ahoy " + data[0].get(data[1]) + "!");
+      });
+
+      table.add(data[0]);
+
+      //define view
+      var TableView = Backbone.View.extend({
+
+        tagName: 'div',
+
+        render: function() {
+          _(data).each(function(item,index,list){
+            for(var key in item){
+              $('<p>' + item[key] + key + ' ' + '</p>').appendTo('#data');
+            }
+          });
+        }
+      });
+
+      //call view
+      var tableView = new TableView({collection: table});
+      tableView.render();
+    </script>
+  </body>
+<!--
+
+create route:
+test route:
+- review  past repos and redraft them.
+https://adwords.google.com/api/adwords/
+https://developers.google.com/adwords/api/docs/headers
+
+
+//dom events - for user.
+//model events - programatic - changes the data - we can respond to these
+ad event to collection - then want to re render.
+
+when user clicks. do x? // handler is listending for this...
+handler gets called.  //triggers action...
+handler modifies model. //name changes/set/getattr/
+handler 2 listens to change event on model.//attr changed...
+then re renders model (same handler does this). cycle complete. -->
