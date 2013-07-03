@@ -1,15 +1,17 @@
-Adwords_Suite
+Adviz.io
 =============
 
 Google Adwords Account Optimization Suite.
 
 Technology Stack: 
+=============
 
 backbone.js
 express.js
 D3.js
 
 Premise of project: 
+=====================
 After optimizing $30M in Search Engine Marketing accounts I recognized success patterns.
 I soon developed an algorithm with a hedge fund. Our first test account return 29.7% increase in profit margins.
 This prototype is a visualization of the special calculations done on top of the Adwords data.
