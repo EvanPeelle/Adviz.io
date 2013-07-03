@@ -1,14 +1,7 @@
 Adviz.io
 =============
 
-Google Adwords Account Optimization Suite.
-
-Technology Stack: 
-==================
-
-backbone.js 
-express.js 
-D3.js 
+- Google Adwords Account Optimization Suite.
 
 Premise of project: 
 =====================
@@ -33,6 +26,11 @@ Visualization 3
 clearly represents the proportion of your keywords that are returning negative ROI due to a poor matching of landing page to keyword.
 You'll notice a sharp contrast between low quality score and cost per click. 
 
+Technology Stack: 
+===================
+- backbone.js 
+- express.js 
+- D3.js 
 
 
 
