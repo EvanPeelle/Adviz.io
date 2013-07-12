@@ -22,7 +22,7 @@ Visualization 2
 the drivers of profit is most of the time the opposite of what managers might think(based on CTR's and Conversions). This 
 visualization combines deep financial data with the sentiment analysis of the ads, finding the bread winners.
 
-<img src="http://3.bp.blogspot.com/-gl_iQjaUEFs/Ud9KDE4SxyI/AAAAAAAABF4/-S1mcQ_mC3E/s1600/Screen+Shot+2013-07-11+at+5.00.57+PM.png"/>
+<img src="http://1.bp.blogspot.com/-jkyVQIi90YQ/Ud9KQgGzQaI/AAAAAAAABGA/mcrAFMHim38/s1600/Screen+Shot+2013-07-11+at+4.59.17+PM.png"/>
 
 Visualization 3 
 ==================
